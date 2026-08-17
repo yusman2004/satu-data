@@ -1,0 +1,5 @@
+@extends('layouts.admin')
+@section('page-title', $organization->exists?'Edit Instansi':'Tambah Instansi')
+@section('content')
+<div class="card p-4"><form method="post" action="{{ $organization->exists?route('admin.organizations.update',$organization):route('admin.organizations.store') }}">@csrf @if($organization->exists) @method('PUT') @endif<div class="mb-3"><label class="form-label">Nama Instansi</label><input name="name" class="form-control" value="{{ old('name',$organization->name) }}" required></div><div class="mb-3"><label class="form-label">Kode</label><input name="code" class="form-control" value="{{ old('code',$organization->code) }}" required></div><div class="mb-3"><label class="form-label">Deskripsi</label><textarea name="description" class="form-control" rows="4">{{ old('description',$organization->description) }}</textarea></div><button class="btn btn-primary">Simpan</button> <a href="{{ route('admin.organizations.index') }}" class="btn btn-light">Batal</a></form></div>
+@endsection

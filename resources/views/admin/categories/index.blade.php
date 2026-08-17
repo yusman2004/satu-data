@@ -1,0 +1,5 @@
+@extends('layouts.admin')
+@section('page-title','Kategori')
+@section('content')
+<div class="card p-4"><div class="d-flex justify-content-between mb-3"><h5 class="fw-bold">Daftar Kategori</h5><a href="{{ route('admin.categories.create') }}" class="btn btn-primary">Tambah</a></div><table class="table align-middle"><thead><tr><th>Nama</th><th>Deskripsi</th><th>Dataset</th><th></th></tr></thead><tbody>@foreach($categories as $c)<tr><td class="fw-semibold">{{ $c->name }}</td><td>{{ Str::limit($c->description,70) }}</td><td>{{ $c->datasets_count }}</td><td class="text-end"><a href="{{ route('admin.categories.edit',$c) }}" class="btn btn-sm btn-outline-primary">Edit</a><form class="d-inline" method="post" action="{{ route('admin.categories.destroy',$c) }}" onsubmit="return confirm('Hapus kategori?')">@csrf @method('DELETE')<button class="btn btn-sm btn-outline-danger">Hapus</button></form></td></tr>@endforeach</tbody></table>{{ $categories->links() }}</div>
+@endsection

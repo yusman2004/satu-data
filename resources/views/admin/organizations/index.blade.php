@@ -1,0 +1,5 @@
+@extends('layouts.admin')
+@section('page-title','Instansi')
+@section('content')
+<div class="card p-4"><div class="d-flex justify-content-between mb-3"><h5 class="fw-bold">Daftar Instansi</h5><a href="{{ route('admin.organizations.create') }}" class="btn btn-primary">Tambah</a></div><table class="table align-middle"><thead><tr><th>Instansi</th><th>Kode</th><th>Dataset</th><th></th></tr></thead><tbody>@foreach($organizations as $o)<tr><td class="fw-semibold">{{ $o->name }}</td><td><span class="badge bg-light text-dark">{{ $o->code }}</span></td><td>{{ $o->datasets_count }}</td><td class="text-end"><a href="{{ route('admin.organizations.edit',$o) }}" class="btn btn-sm btn-outline-primary">Edit</a><form class="d-inline" method="post" action="{{ route('admin.organizations.destroy',$o) }}" onsubmit="return confirm('Hapus instansi?')">@csrf @method('DELETE')<button class="btn btn-sm btn-outline-danger">Hapus</button></form></td></tr>@endforeach</tbody></table>{{ $organizations->links() }}</div>
+@endsection

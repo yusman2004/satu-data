@@ -1,0 +1,5 @@
+@extends('layouts.admin')
+@section('page-title', $category->exists?'Edit Kategori':'Tambah Kategori')
+@section('content')
+<div class="card p-4"><form method="post" action="{{ $category->exists?route('admin.categories.update',$category):route('admin.categories.store') }}">@csrf @if($category->exists) @method('PUT') @endif<div class="mb-3"><label class="form-label">Nama</label><input name="name" class="form-control" value="{{ old('name',$category->name) }}" required></div><div class="mb-3"><label class="form-label">Deskripsi</label><textarea name="description" class="form-control" rows="4">{{ old('description',$category->description) }}</textarea></div><button class="btn btn-primary">Simpan</button> <a href="{{ route('admin.categories.index') }}" class="btn btn-light">Batal</a></form></div>
+@endsection
